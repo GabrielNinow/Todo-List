@@ -1,0 +1,36 @@
+@if (!getListItems().length) {
+<div class="container">
+    <img src="assets/img/task-list-null.png" alt="empty list warning image" loading="eager">
+    @if (addItem()) {
+    <button class="btn btn-primary" (click)="addItem.set(false)">Start using to do list</button>
+    }@else{
+    <app-input-add-item [inputListItems]="getListItems()" (outputAddListItems)="getInputAndAddItem($event)" />
+    }
+</div>
+}@else {
+<app-input-add-item [inputListItems]="getListItems()" (outputAddListItems)="getInputAndAddItem($event)" />
+
+<main class="container">
+    @if (listItemsStage('todo').length) {
+    <h2>To do</h2>
+    <app-input-list-item [inputListItems]="listItemsStage('todo')"
+        (outputUpdateItemCheckbox)="updateItemCheckbox($event)" (outputUpdateItemText)="updateItemText($event)"
+        (outputDeleteItem)="deleteItem($event)" />
+    }
+
+    @if (listItemsStage('finished').length) {
+    <h2>Finished</h2>
+    <app-input-list-item [inputListItems]="listItemsStage('finished')"
+        (outputUpdateItemCheckbox)="updateItemCheckbox($event)" (outputUpdateItemText)="updateItemText($event)"
+        (outputDeleteItem)="deleteItem($event)" />
+    }
+
+</main>
+
+
+<footer>
+    <button class="btn btn-danger" (click)="deleteAllItems()">
+        Delete all tasks
+    </button>
+</footer>
+}
