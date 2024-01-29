@@ -10,4 +10,13 @@
 }@else {
 <app-input-add-item [inputListItems]="getListItems()" (outputAddListItems)="getInputAndAddItem($event)" />
 
+<main class="container">
+
+</main>
+
+<footer>
+    <button class="btn btn-danger" (click)="deleteAllItems()">
+        Delete all tasks
+    </button>
+</footer>
 }
